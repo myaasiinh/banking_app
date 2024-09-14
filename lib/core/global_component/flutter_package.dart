@@ -10,6 +10,7 @@ class BaseWidgetContainer extends StatelessWidget {
     this.actvateScroll = false,
     this.backgroundColor,
     this.scaffoldKey,
+    this.bottomNavigationBar,
   });
 
   final PreferredSizeWidget? appBar;
@@ -19,6 +20,8 @@ class BaseWidgetContainer extends StatelessWidget {
   final bool? actvateScroll;
   final Color? backgroundColor;
   final Key? scaffoldKey;
+  final Widget? bottomNavigationBar;
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,8 @@ class BaseWidgetContainer extends StatelessWidget {
           : body,
       backgroundColor: backgroundColor,
       key: scaffoldKey,
+      bottomNavigationBar: bottomNavigationBar,
+
     );
   }
 }

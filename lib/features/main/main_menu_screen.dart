@@ -1,8 +1,11 @@
 
+import 'package:banking_app/core/global_component/flutter_package.dart';
+import 'package:banking_app/features/analitik/analitik_screen.dart';
+import 'package:banking_app/features/home/home_screen.dart';
+import 'package:banking_app/features/saldo/saldo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar_v2/motion-tab-controller.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
-
 import '../../core/constants/colors.dart';
 
 
@@ -36,20 +39,7 @@ class _MainScreenState extends State<MainMenuScreen> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorUtils.purpleHoneycreeper,
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: const Text(
-            'My Finance',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold
-          ),
-        ),
-      ),
+    return BaseWidgetContainer(
       body: Container(
         color: ColorUtils.purpleHoneycreeper,
         child: Center(
@@ -57,10 +47,10 @@ class _MainScreenState extends State<MainMenuScreen> with TickerProviderStateMix
             physics: const NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
             // controller: _tabController,
             controller: _motionTabBarController,
-            children: <Widget>[
-              // HomeTabScreen(),
-              // WalletTabScreen(),
-              // SettingTabScreen(),
+            children: const <Widget>[
+               HomeScreen(),
+              SaldoScreen(),
+              AnalitikScreen(),
             ],
           ),
         ),
@@ -69,7 +59,7 @@ class _MainScreenState extends State<MainMenuScreen> with TickerProviderStateMix
         controller: _motionTabBarController, // ADD THIS if you need to change your tab programmatically
         initialSelectedTab: "Home",
         labels: const ["Home", "Wallet", "Analitik"],
-        icons: const [Icons.home, Icons.wallet, Icons.settings],
+        icons: const [Icons.home, Icons.wallet, Icons.analytics],
         tabSize: 50,
         tabBarHeight: 55,
         textStyle: const TextStyle(

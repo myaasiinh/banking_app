@@ -1,16 +1,17 @@
+import '../../../core/constants/images.dart';
 import '../model/transaction_model.dart';
 
 class TransactionData {
   static List<Transaction> getTransactions() {
     return [
       Transaction(
-        iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg',
+        iconUrl: Images.netflix,
         name: 'Netflix',
         date: '01.12.2022, 14:40',
         nominal: -17.00,
       ),
       Transaction(
-        iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg',
+        iconUrl: Images.uber,
         name: 'Spotify',
         date: '29.11.2022, 10:15',
         nominal: -10.00,

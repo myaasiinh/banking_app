@@ -1,5 +1,6 @@
+import 'package:banking_app/core/constants/string.dart';
 import 'package:flutter/material.dart';
-import 'package:banking_app/core/global_component/flutter_package.dart'; 
+import 'package:banking_app/core/global_component/flutter_package.dart';
 import '../../core/global_component/credit_card_custom.dart';
 import '../../data/transaction/dummy/transaction_dummy.dart';
 import '../../data/transaction/model/transaction_model.dart';
@@ -13,11 +14,14 @@ class HomeScreen extends StatelessWidget {
     final List<Transaction> transactions = TransactionData.getTransactions(); // Fetching dummy transactions
 
     return BaseWidgetContainer(
+      actvateScroll: true,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 20),
           _buildHeader(), // Top header
+          const SizedBox(height: 20),
+          _buildAfterHeader(),
           const SizedBox(height: 20),
           _buildCreditCardsSection(), // Section for cards
           const SizedBox(height: 20),
@@ -33,9 +37,9 @@ class HomeScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Your Card Information',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          IconButton(
+            icon: const Icon(Icons.person_2_outlined),
+            onPressed: () {},
           ),
           IconButton(
             icon: const Icon(Icons.notifications_outlined),
@@ -46,33 +50,38 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildAfterHeader() {
+    return Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            StringText.yourcardinfo,
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          _buildAddButton(),
+        ],
+      ),
+    );
+  }
+
+
   Widget _buildCreditCardsSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'All Credit Cards (2)',
+          Text(
+           StringText.allcreditcard,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const CreditCard(
-                cardNumber: '**** 5482',
-                owner: 'Jordan Smith',
-                expiry: '04/24',
-                isPrimary: true,
-              ),
-              const CreditCard(
-                cardNumber: '**** 4168',
-                owner: 'Jordan Smith',
-                expiry: '04/24',
-              ),
-              _buildAddButton(), // Add button widget
-            ],
+          SizedBox(height: 16),
+          CreditCard(
+            cardNumber: '**** 5482',
+            owner: 'Jordan Smith',
+            expiry: '04/24',
+            isPrimary: true,
           ),
         ],
       ),
@@ -103,7 +112,7 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Latest Transactions',
+            StringText.latest,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),

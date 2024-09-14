@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:banking_app/core/global_component/flutter_package.dart';
+import '../../core/constants/images.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -15,7 +16,7 @@ class SplashScreen extends StatelessWidget {
 
     return BaseWidgetContainer(
       body: Center(
-        child: Image.asset('assets/images/logo.png'),  // Gambar logo splash
+        child: Image.asset(Images.banking), // Gambar logo splash
       ),
     );
   }
