@@ -7,8 +7,10 @@ environment:
   sdk: ^3.5.2
 
 dependencies:
+  fl_chart: ^0.69.0
   flutter:
     sdk: flutter
+  motion_tab_bar_v2: ^0.3.0
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +19,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets :
+    - asset/
