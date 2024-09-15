@@ -15,8 +15,11 @@ class SplashScreen extends StatelessWidget {
     });
 
     return BaseWidgetContainer(
-      body: Center(
-        child: Image.asset(Images.banking), // Gambar logo splash
+      body: Padding(
+        padding: const EdgeInsets.all(96),
+        child: Center(
+          child: Image.asset(Images.banking), // Gambar logo splash
+        ),
       ),
     );
   }

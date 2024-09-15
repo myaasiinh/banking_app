@@ -1,4 +1,6 @@
 import 'package:banking_app/core/global_component/flutter_package.dart';
+import 'package:banking_app/data/history/dummy/history_dummy.dart';
+import 'package:banking_app/data/history/model/history_model.dart';
 import 'package:banking_app/data/saldo/dummy/saldo_dummy.dart';
 import 'package:banking_app/features/saldo/widgets/credit_card_section.dart';
 import 'package:banking_app/features/saldo/widgets/icon_with_text.dart';
@@ -14,8 +16,8 @@ class SaldoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Transaction> transactions =
-        TransactionData.getTransactions(); // Fetching dummy transactions
+    final List<HistoryModel> history =
+        HistoryData.getHistory(); // Fetching dummy transactions
 
     return BaseWidgetContainer(
       backgroundColor: ColorUtils.pastelGreen,
@@ -31,7 +33,7 @@ class SaldoScreen extends StatelessWidget {
           const SizedBox(height: 20),
           _buildListIcon(),
           const SizedBox(height: 20),
-          _buildTransactionsSection(transactions), // Section for transactions
+          _buildTransactionsSection(history), // Section for transactions
         ],
       ),
     );
@@ -139,7 +141,7 @@ class SaldoScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTransactionsSection(List<Transaction> transactions) {
+  Widget _buildTransactionsSection(List<HistoryModel> transactions) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -151,7 +153,7 @@ class SaldoScreen extends StatelessWidget {
           ),
           const Text(
             StringText.sendto,
-            style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 35, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 5),
           SizedBox(

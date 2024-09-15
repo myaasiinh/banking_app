@@ -26,7 +26,6 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 10),
           _buildAfterHeader(),
           _buildCreditCardsSection(), // Section for cards
-          const SizedBox(height: 20),
           _buildTransactionsSection(transactions), // Section for transactions
         ],
       ),
@@ -183,7 +182,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Text(
                 StringText.transactions,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 25, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
               ),
               const Icon(Icons.arrow_forward_ios, size: 16),
             ],

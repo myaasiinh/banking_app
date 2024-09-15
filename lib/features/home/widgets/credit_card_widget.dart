@@ -36,7 +36,7 @@ class CreditCard extends StatelessWidget {
     return Transform.translate(
       offset: const Offset(0, -25), // Move the back card up
       child: Container(
-        height: 200,
+        height: 175,
         margin: const EdgeInsets.only(top: 30), // Show part of the back card
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
@@ -110,7 +110,7 @@ class CreditCard extends StatelessWidget {
     return Transform.translate(
       offset: const Offset(0, 70), // Move the front card down
       child: Container(
-        height: 180,
+        height: 150,
         width: double.infinity, // Make the width 90% of the screen width
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(

@@ -1,3 +1,4 @@
+import 'package:banking_app/features/analitik/widgets/bar_chat_desc.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../features/analitik/widgets/barchat_widget.dart'; // Pastikan path import sesuai
@@ -123,9 +124,21 @@ class AnalitikScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            StringText.totalbalance,
-            style: TextStyle(fontSize: 20),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                StringText.totalbalance,
+                style: TextStyle(fontSize: 20),
+              ),
+              BarChartDesc(
+                color1: ColorUtils.coralOrange,
+                color2: ColorUtils.purpleIllusionist,
+                textValue1: 'Income',
+                textValue2: 'Outcome',
+              ),
+
+            ],
           ),
           SizedBox(
             height: 200, // Adjust height as needed
@@ -157,9 +170,15 @@ class AnalitikScreen extends StatelessWidget {
             style: TextStyle(fontSize: 20),
           ),
           const SizedBox(height: 5),
-          const Text(
-            StringText.history,
-            style: TextStyle(fontSize: 30),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                StringText.history,
+                style: TextStyle(fontSize: 30, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+              ),
+              const Icon(Icons.arrow_forward_ios, size: 16),
+            ],
           ),
           const SizedBox(height: 5),
           SizedBox(
