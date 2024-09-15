@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 class CreditCardCustom extends StatelessWidget {
@@ -41,7 +42,7 @@ class CreditCardCustom extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
-                image: AssetImage(imageUrl),
+                image: FileImage(File(imageUrl)), // Use FileImage for local files
                 fit: BoxFit.cover,
               ),
             ),
