@@ -1,47 +1,49 @@
 import 'package:flutter/material.dart';
 import '../../../core/utils/sqlite_utils.dart';
-import '../../../data/transaction/model/credit_card_model.dart';
 
-class AddCreditCardBottomSheet extends StatelessWidget {
-  final TextEditingController cardNumberController = TextEditingController();
-  final TextEditingController ownerController = TextEditingController();
-  final TextEditingController expiryController = TextEditingController();
+class AddTransactionBottomSheet extends StatelessWidget {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _nominalController = TextEditingController();
+  final TextEditingController _iconUrlController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
-            controller: cardNumberController,
-            decoration: InputDecoration(labelText: 'Card Number'),
+            controller: _nameController,
+            decoration: const InputDecoration(labelText: 'Service Name'),
           ),
           TextField(
-            controller: ownerController,
-            decoration: InputDecoration(labelText: 'Owner'),
+            controller: _dateController,
+            decoration: const InputDecoration(labelText: 'Date'),
           ),
           TextField(
-            controller: expiryController,
-            decoration: InputDecoration(labelText: 'Expiry Date'),
+            controller: _nominalController,
+            decoration: const InputDecoration(labelText: 'Amount'),
+            keyboardType: TextInputType.number,
           ),
-          SizedBox(height: 20),
+          TextField(
+            controller: _iconUrlController,
+            decoration: const InputDecoration(labelText: 'Icon URL'),
+          ),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () async {
-              final card = CreditCardModel(
-                cardNumber: cardNumberController.text,
-                owner: ownerController.text,
-                expiry: expiryController.text,
-                isPrimary: false, // Or set to true if you want
-              );
-
-              await DatabaseHelper.instance.insert(card);
-
-              Navigator.pop(context); // Close the bottom sheet
-              // Refresh the UI by notifying listeners or using setState
+              final transaction = {
+                'iconUrl': _iconUrlController.text,
+                'name': _nameController.text,
+                'date': _dateController.text,
+                'nominal': double.parse(_nominalController.text),
+              };
+              await DBHelper().insertTransaction(transaction);
+              Navigator.pop(context);
             },
-            child: Text('Add Card'),
+            child: const Text('Add Transaction'),
           ),
         ],
       ),
