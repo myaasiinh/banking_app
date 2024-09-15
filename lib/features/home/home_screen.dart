@@ -28,12 +28,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _loadTransactions() async {
     final data = await DBHelper().getTransactions();
     setState(() {
-      _transactions = data.map((e) => Transaction(
-        iconUrl: e['iconUrl'],
-        name: e['name'],
-        date: e['date'],
-        nominal: e['nominal'],
-      )).toList();
+      _transactions = data
+          .map((e) => Transaction(
+                iconUrl: e['iconUrl'],
+                name: e['name'],
+                date: e['date'],
+                nominal: e['nominal'],
+              ))
+          .toList();
     });
   }
 
@@ -157,7 +159,8 @@ class _HomeScreenState extends State<HomeScreen> {
         clipBehavior: Clip.none,
         children: [
           Container(
-            padding: const EdgeInsets.only(left: 16, right: 50, top: 10, bottom: 10),
+            padding:
+                const EdgeInsets.only(left: 16, right: 50, top: 10, bottom: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               border: Border.all(color: Colors.black),
@@ -201,27 +204,41 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text(
                 StringText.transactions,
-                style: TextStyle(fontSize: 25, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.bold),
               ),
               Icon(Icons.arrow_forward_ios, size: 16),
             ],
           ),
+          const SizedBox(height: 10), // Add some space
           SizedBox(
             height: 170,
-            child: ListView.builder(
-              itemCount: _transactions.length,
-              itemBuilder: (context, index) {
-                final transaction = _transactions[index];
-                return CreditCardCustom(
-                  serviceName: transaction.name,
-                  dateTime: transaction.date,
-                  amount: transaction.nominal > 0
-                      ? '+\$${transaction.nominal}'
-                      : '-\$${transaction.nominal.abs()}',
-                  imageUrl: transaction.iconUrl,
-                );
-              },
-            ),
+            child: _transactions.isEmpty
+                ? const Center(
+                    child: Text(
+                      StringText.notransactions,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: ColorUtils.backgroundColors,
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: _transactions.length,
+                    itemBuilder: (context, index) {
+                      final transaction = _transactions[index];
+                      return CreditCardCustom(
+                        serviceName: transaction.name,
+                        dateTime: transaction.date,
+                        amount: transaction.nominal > 0
+                            ? '+\$${transaction.nominal}'
+                            : '-\$${transaction.nominal.abs()}',
+                        imageUrl: transaction.iconUrl,
+                      );
+                    },
+                  ),
           ),
         ],
       ),
