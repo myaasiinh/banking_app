@@ -11,8 +11,8 @@ class BarChartDesc extends StatelessWidget {
     required this.color2,
     required this.textValue1,
     required this.textValue2,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

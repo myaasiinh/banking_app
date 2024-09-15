@@ -1,7 +1,6 @@
 import 'package:banking_app/core/constants/string.dart';
-import 'package:flutter/material.dart';
+
 import '../../../core/constants/colors.dart';
-import '../../../features/analitik/widgets/barchat_widget.dart';
 import '../model/analitik_model.dart';
 
 class AnalitikDummy {

@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:banking_app/core/global_component/flutter_package.dart';
+import 'package:flutter/material.dart';
+
 import '../../core/constants/images.dart';
 
 class SplashScreen extends StatelessWidget {

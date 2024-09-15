@@ -30,8 +30,7 @@ class CreditCard extends StatelessWidget {
       ),
     );
   }
-
-  // Back Card with circle designs and card number on the left
+// Back Card with circle designs and card number on the left
   Widget _buildBackCard(double screenWidth) {
     return Transform.translate(
       offset: const Offset(0, -25), // Move the back card up
@@ -67,11 +66,12 @@ class CreditCard extends StatelessWidget {
               ),
             ),
             // Position the circles slightly upwards and to the right
+            // Adjust circle positioning and responsiveness
             Positioned(
               top: 10, // Adjust this value to move the circles upwards
-              right: 16, // Adjust for aligning with the card
+              right: screenWidth * 0.0001, // Shift circles to the right relative to screen width
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround, // Distribute space between circles
+                mainAxisAlignment: MainAxisAlignment.start, // Keep alignment
                 children: [
                   // First circle
                   Container(
@@ -85,7 +85,7 @@ class CreditCard extends StatelessWidget {
                   ),
                   // Second circle overlapping the first one
                   Transform.translate(
-                    offset: Offset(-screenWidth * 0.05, 0), // Adjust overlap based on screen width
+                    offset: Offset(-screenWidth * 0.05, 0), // Adjust overlap relative to screen width
                     child: Container(
                       width: screenWidth * 0.1,
                       height: screenWidth * 0.1,
@@ -99,6 +99,7 @@ class CreditCard extends StatelessWidget {
                 ],
               ),
             ),
+
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:banking_app/core/global_component/flutter_package.dart';
 import 'package:banking_app/features/main/main_menu_screen.dart';
 import 'package:flutter/material.dart';
+
 import '../../features/main/splash_screen.dart';
 
 class RouteApp {

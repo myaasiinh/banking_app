@@ -1,5 +1,6 @@
 import 'package:banking_app/features/analitik/widgets/bar_chat_desc.dart';
 import 'package:flutter/material.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../features/analitik/widgets/barchat_widget.dart'; // Pastikan path import sesuai
 import '../../core/constants/string.dart';
@@ -10,8 +11,6 @@ import '../../data/analitik/model/analitik_model.dart';
 import '../../data/transaction/dummy/transaction_dummy.dart';
 import '../../data/transaction/model/transaction_model.dart';
 import '../../features/analitik/widgets/tab_menu_widget.dart'; // Pastikan path import sesuai
-import '../../features/saldo/widgets/credit_card_section.dart'; // Pastikan path import sesuai
-import '../../features/saldo/widgets/icon_with_text.dart'; // Pastikan path import sesuai
 
 class AnalitikScreen extends StatelessWidget {
   const AnalitikScreen({super.key});
@@ -28,7 +27,7 @@ class AnalitikScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 10),
           _buildHeader(), // Top header
           const SizedBox(height: 10),
           _buildAfterHeader(),
@@ -177,7 +176,7 @@ class AnalitikScreen extends StatelessWidget {
                 StringText.history,
                 style: TextStyle(fontSize: 30, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
               ),
-              const Icon(Icons.arrow_forward_ios, size: 16),
+              Icon(Icons.arrow_forward_ios, size: 16),
             ],
           ),
           const SizedBox(height: 5),

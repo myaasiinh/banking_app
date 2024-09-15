@@ -4,8 +4,9 @@ import 'package:banking_app/features/analitik/analitik_screen.dart';
 import 'package:banking_app/features/home/home_screen.dart';
 import 'package:banking_app/features/saldo/saldo_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:motion_tab_bar_v2/motion-tab-controller.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
+import 'package:motion_tab_bar_v2/motion-tab-controller.dart';
+
 import '../../core/constants/colors.dart';
 
 
@@ -39,46 +40,48 @@ class _MainScreenState extends State<MainMenuScreen> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return BaseWidgetContainer(
-      body: Container(
-        color: ColorUtils.purpleHoneycreeper,
-        child: Center(
-          child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
-            // controller: _tabController,
-            controller: _motionTabBarController,
-            children: const <Widget>[
-               HomeScreen(),
-              SaldoScreen(),
-              AnalitikScreen(),
-            ],
+    return SafeArea(
+      child: BaseWidgetContainer(
+        body: Container(
+          color: ColorUtils.purpleHoneycreeper,
+          child: Center(
+            child: TabBarView(
+              physics: const NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
+              // controller: _tabController,
+              controller: _motionTabBarController,
+              children: const <Widget>[
+                 HomeScreen(),
+                SaldoScreen(),
+                AnalitikScreen(),
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: MotionTabBar(
-        controller: _motionTabBarController, // ADD THIS if you need to change your tab programmatically
-        initialSelectedTab: "Home",
-        labels: const ["Home", "Wallet", "Analitik"],
-        icons: const [Icons.home, Icons.wallet, Icons.analytics],
-        tabSize: 50,
-        tabBarHeight: 55,
-        textStyle: const TextStyle(
-          fontSize: 12,
-          color: Colors.black,
-          fontWeight: FontWeight.w500,
+        bottomNavigationBar: MotionTabBar(
+          controller: _motionTabBarController, // ADD THIS if you need to change your tab programmatically
+          initialSelectedTab: "Home",
+          labels: const ["Home", "Wallet", "Analitik"],
+          icons: const [Icons.home, Icons.wallet, Icons.analytics],
+          tabSize: 50,
+          tabBarHeight: 55,
+          textStyle: const TextStyle(
+            fontSize: 12,
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+          ),
+          tabIconColor: Colors.grey,
+          tabIconSize: 28.0,
+          tabIconSelectedSize: 26.0,
+          tabSelectedColor: ColorUtils.peachCream,
+          tabIconSelectedColor: ColorUtils.coralOrange,
+          tabBarColor: Colors.white,
+          onTabItemSelected: (int value) {
+            setState(() {
+              // _tabController!.index = value;
+              _motionTabBarController!.index = value;
+            });
+          },
         ),
-        tabIconColor: Colors.grey,
-        tabIconSize: 28.0,
-        tabIconSelectedSize: 26.0,
-        tabSelectedColor: ColorUtils.peachCream,
-        tabIconSelectedColor: ColorUtils.coralOrange,
-        tabBarColor: Colors.white,
-        onTabItemSelected: (int value) {
-          setState(() {
-            // _tabController!.index = value;
-            _motionTabBarController!.index = value;
-          });
-        },
       ),
     );
   }

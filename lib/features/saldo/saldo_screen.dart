@@ -1,15 +1,13 @@
+import 'package:banking_app/core/constants/colors.dart';
+import 'package:banking_app/core/constants/string.dart';
 import 'package:banking_app/core/global_component/flutter_package.dart';
 import 'package:banking_app/data/history/dummy/history_dummy.dart';
 import 'package:banking_app/data/history/model/history_model.dart';
-import 'package:banking_app/data/saldo/dummy/saldo_dummy.dart';
 import 'package:banking_app/features/saldo/widgets/credit_card_section.dart';
 import 'package:banking_app/features/saldo/widgets/icon_with_text.dart';
 import 'package:flutter/material.dart';
-import 'package:banking_app/core/constants/colors.dart';
-import 'package:banking_app/core/constants/string.dart';
+
 import '../../core/global_component/credit_card_custom.dart';
-import '../../data/transaction/dummy/transaction_dummy.dart';
-import '../../data/transaction/model/transaction_model.dart';
 
 class SaldoScreen extends StatelessWidget {
   const SaldoScreen({super.key});
@@ -25,7 +23,7 @@ class SaldoScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 10),
           _buildHeader(), // Top header
           const SizedBox(height: 10),
           _buildAfterHeader(),

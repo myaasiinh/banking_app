@@ -7,7 +7,7 @@ class BarChart extends StatelessWidget {
   final double barWidth;
   final double barSpacing;
 
-  BarChart({
+  const BarChart({super.key,
     required this.data,
     this.barWidth = 20.0,
     this.barSpacing = 10.0,
@@ -28,7 +28,7 @@ class BarChart extends StatelessWidget {
             barSpacing: barSpacing,
           ),
         ),
-        SizedBox(height: 8.0),
+        const SizedBox(height: 8.0),
         Text(data.text),
       ],
     );
@@ -79,7 +79,7 @@ class BarChartPainter extends CustomPainter {
       barHeight2,
     );
 
-    final Radius radius = Radius.circular(8.0);
+    const Radius radius = Radius.circular(8.0);
 
     final RRect rrect1 = RRect.fromRectAndRadius(rect1, radius);
     final RRect rrect2 = RRect.fromRectAndRadius(rect2, radius);

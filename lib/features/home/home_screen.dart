@@ -1,7 +1,8 @@
 import 'package:banking_app/core/constants/colors.dart';
 import 'package:banking_app/core/constants/string.dart';
-import 'package:flutter/material.dart';
 import 'package:banking_app/core/global_component/flutter_package.dart';
+import 'package:flutter/material.dart';
+
 import '../../core/global_component/credit_card_custom.dart';
 import '../../data/transaction/dummy/transaction_dummy.dart';
 import '../../data/transaction/model/transaction_model.dart';
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 10),
           _buildHeader(), // Top header
           const SizedBox(height: 10),
           _buildAfterHeader(),
@@ -184,7 +185,7 @@ class HomeScreen extends StatelessWidget {
                 StringText.transactions,
                 style: TextStyle(fontSize: 25, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
               ),
-              const Icon(Icons.arrow_forward_ios, size: 16),
+              Icon(Icons.arrow_forward_ios, size: 16),
             ],
           ),
           SizedBox(

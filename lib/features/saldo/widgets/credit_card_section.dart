@@ -66,8 +66,8 @@ class CreditCardSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        Center(
-          child: const Text(
+        const Center(
+          child: Text(
             "40 540.74 USD",
             style: TextStyle(
               fontSize: 36,
