@@ -22,6 +22,8 @@ class ColorUtils {
   static const Color cloudBreak = Color.fromRGBO(157, 139, 242, 0.5);
   static const Color coralOrange = Color(0xFFFF885B); // Hex #FF885B
   static const Color peachCream = Color(0xFFFFE5CF); // Hex #FFE5CF
+  static const Color skyBlue = Color(0xFF81DAE3); // Hex #81DAE3
+  static const Color lightTeal = Color(0xFF6CBEC7); // Hex #6CBEC7
 
   // Added color
   static const Color pastelGreen = Color(0xFFC7FFD8); // Hex #C7FFD8
