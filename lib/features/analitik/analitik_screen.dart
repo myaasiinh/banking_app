@@ -5,18 +5,45 @@ import '../../../features/analitik/widgets/barchat_widget.dart'; // Pastikan pat
 import '../../core/constants/string.dart';
 import '../../core/global_component/credit_card_custom.dart';
 import '../../core/global_component/flutter_package.dart';
+import '../../core/utils/sqlite_utils.dart';
 import '../../data/analitik/dummy/analitik_dummy.dart'; // Pastikan path import sesuai
 import '../../data/analitik/model/analitik_model.dart';
 import '../../data/transaction/dummy/transaction_dummy.dart';
 import '../../data/transaction/model/transaction_model.dart';
 import '../../features/analitik/widgets/tab_menu_widget.dart'; // Pastikan path import sesuai
 
-class AnalitikScreen extends StatelessWidget {
+class AnalitikScreen extends StatefulWidget {
   const AnalitikScreen({super.key});
 
   @override
+  State<AnalitikScreen> createState() => _AnalitikScreenState();
+}
+
+class _AnalitikScreenState extends State<AnalitikScreen> {
+  List<Transaction> _transactions = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTransactions();
+  }
+
+  Future<void> _loadTransactions() async {
+    final data = await DBHelper().getTransactions();
+    setState(() {
+      _transactions = data
+          .map((e) => Transaction(
+        iconUrl: e['iconUrl'],
+        name: e['name'],
+        date: e['date'],
+        nominal: e['nominal'],
+      ))
+          .toList();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final List<Transaction> transactions = TransactionData.getTransactions(); // Fetching dummy transactions
     final analitikDummy = AnalitikDummy();
     final List<BarChartData> barChartDataList = analitikDummy.getDummyBarChartData();
 
@@ -34,7 +61,7 @@ class AnalitikScreen extends StatelessWidget {
           _buildCreditCardsSection(), // Section for cards
           const SizedBox(height: 10),
           _buildBarChartsSection(barChartDataList), // Section for bar charts
-          _buildTransactionsSection(transactions), // Section for transactions
+          _buildTransactionsSection(), // Section for transactions
         ],
       ),
     );
@@ -157,7 +184,7 @@ class AnalitikScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTransactionsSection(List<Transaction> transactions) {
+  Widget _buildTransactionsSection() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -180,11 +207,21 @@ class AnalitikScreen extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           SizedBox(
-            height: 170, // Tentukan tinggi yang sesuai atau gunakan media query
-            child: ListView.builder(
-              itemCount: transactions.length,
+            height: 170,
+            child: _transactions.isEmpty
+                ? const Center(
+              child: Text(
+                StringText.nohistoryaddDatafromHome,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: ColorUtils.backgroundColors,
+                ),
+              ),
+            )
+                : ListView.builder(
+              itemCount: _transactions.length,
               itemBuilder: (context, index) {
-                final transaction = transactions[index];
+                final transaction = _transactions[index];
                 return CreditCardCustom(
                   serviceName: transaction.name,
                   dateTime: transaction.date,

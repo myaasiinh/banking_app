@@ -1,22 +1,54 @@
 import 'package:banking_app/core/constants/colors.dart';
 import 'package:banking_app/core/constants/string.dart';
 import 'package:banking_app/core/global_component/flutter_package.dart';
-import 'package:banking_app/data/history/dummy/history_dummy.dart';
-import 'package:banking_app/data/history/model/history_model.dart';
 import 'package:banking_app/features/saldo/widgets/credit_card_section.dart';
 import 'package:banking_app/features/saldo/widgets/icon_with_text.dart';
 import 'package:flutter/material.dart';
-
 import '../../core/global_component/credit_card_custom.dart';
+import '../../core/utils/sqlite_utils.dart';
+import '../../data/transaction/model/transaction_model.dart';
+import '../../core/global_component/bottom_sheet_form.dart';
 
-class SaldoScreen extends StatelessWidget {
+class SaldoScreen extends StatefulWidget {
   const SaldoScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<HistoryModel> history =
-        HistoryData.getHistory(); // Fetching dummy transactions
+  State<SaldoScreen> createState() => _SaldoScreenState();
+}
 
+class _SaldoScreenState extends State<SaldoScreen> {
+  List<Transaction> _transactions = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTransactions();
+  }
+
+  Future<void> _loadTransactions() async {
+    final data = await DBHelper().getTransactions();
+    setState(() {
+      _transactions = data
+          .map((e) => Transaction(
+                iconUrl: e['iconUrl'],
+                name: e['name'],
+                date: e['date'],
+                nominal: e['nominal'],
+              ))
+          .toList();
+    });
+  }
+
+  void _showAddTransactionBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => AddTransactionBottomSheet(),
+    ).then((_) => _loadTransactions()); // Reload transactions after adding
+  }
+// Fetching dummy transactions
+
+  @override
+  Widget build(BuildContext context) {
     return BaseWidgetContainer(
       backgroundColor: ColorUtils.pastelGreen,
       actvateScroll: true,
@@ -31,7 +63,7 @@ class SaldoScreen extends StatelessWidget {
           const SizedBox(height: 20),
           _buildListIcon(),
           const SizedBox(height: 20),
-          _buildTransactionsSection(history), // Section for transactions
+          _buildTransactionsSection(), // Section for transactions
         ],
       ),
     );
@@ -132,14 +164,16 @@ class SaldoScreen extends StatelessWidget {
           IconWithText(
             icon: Icons.bookmark_added_outlined,
             label: 'Add',
-            onPressed: () {},
+            onPressed: () {
+              _showAddTransactionBottomSheet();
+            },
           ),
         ],
       ),
     );
   }
 
-  Widget _buildTransactionsSection(List<HistoryModel> transactions) {
+  Widget _buildTransactionsSection() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -151,25 +185,38 @@ class SaldoScreen extends StatelessWidget {
           ),
           const Text(
             StringText.sendto,
-            style: TextStyle(fontSize: 35, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 35,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 5),
           SizedBox(
-            height: 170, // Tentukan tinggi yang sesuai atau gunakan media query
-            child: ListView.builder(
-              itemCount: transactions.length,
-              itemBuilder: (context, index) {
-                final transaction = transactions[index];
-                return CreditCardCustom(
-                  serviceName: transaction.name,
-                  dateTime: transaction.date,
-                  amount: transaction.nominal > 0
-                      ? '+\$${transaction.nominal}'
-                      : '-\$${transaction.nominal.abs()}',
-                  imageUrl: transaction.iconUrl,
-                );
-              },
-            ),
+            height: 170,
+            child: _transactions.isEmpty
+                ? const Center(
+                    child: Text(
+                      StringText.notransactions,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: ColorUtils.purpleIllusionist,
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: _transactions.length,
+                    itemBuilder: (context, index) {
+                      final transaction = _transactions[index];
+                      return CreditCardCustom(
+                        serviceName: transaction.name,
+                        dateTime: transaction.date,
+                        amount: transaction.nominal > 0
+                            ? '+\$${transaction.nominal}'
+                            : '-\$${transaction.nominal.abs()}',
+                        imageUrl: transaction.iconUrl,
+                      );
+                    },
+                  ),
           ),
         ],
       ),

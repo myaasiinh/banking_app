@@ -1,7 +1,7 @@
 import 'package:banking_app/core/constants/colors.dart';
 import 'package:banking_app/core/constants/string.dart';
 import 'package:banking_app/core/global_component/flutter_package.dart';
-import 'package:banking_app/features/home/widgets/bottom_sheet_form.dart';
+import 'package:banking_app/core/global_component/bottom_sheet_form.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/global_component/credit_card_custom.dart';
