@@ -39,7 +39,7 @@ class IconWithTextSendto extends StatelessWidget {
         const SizedBox(height: 8), // Space between image and text
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
           //  color: ColorUtils.borderSearchColors, // Text color
             fontSize: 12,
             fontWeight: FontWeight.w500,

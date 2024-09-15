@@ -58,7 +58,7 @@ class SaldoScreen extends StatelessWidget {
             child: IconButton(
               icon: const Icon(Icons.person_2_outlined),
               onPressed: () {},
-              color: ColorUtils.borderSearchColors, // Warna icon hitam
+              color: ColorUtils.backgroundColors, // Warna icon hitam
             ),
           ),
           // Icon with rounded corner container
@@ -71,7 +71,7 @@ class SaldoScreen extends StatelessWidget {
             ),
             child: IconButton(
               icon: const Icon(Icons.notifications_outlined),
-              color: ColorUtils.borderSearchColors, // Warna icon hitam
+              color: ColorUtils.backgroundColors, // Warna icon hitam
               onPressed: () {},
             ),
           ),
@@ -107,7 +107,7 @@ class SaldoScreen extends StatelessWidget {
 
   Widget _buildCreditCardsSection() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 50.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -121,7 +121,7 @@ class SaldoScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconWithText(
             icon: Icons.send_and_archive_outlined,
@@ -153,15 +153,9 @@ class SaldoScreen extends StatelessWidget {
             StringText.lastreceipent,
             style: TextStyle(fontSize: 20),
           ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                StringText.sendto,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const Icon(Icons.arrow_forward_ios, size: 16),
-            ],
+          const Text(
+            StringText.sendto,
+            style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,8 +169,9 @@ class SaldoScreen extends StatelessWidget {
               );
             }).toList(),
           ),
+          const SizedBox(height: 5),
           SizedBox(
-            height: 130, // Tentukan tinggi yang sesuai atau gunakan media query
+            height: 150, // Tentukan tinggi yang sesuai atau gunakan media query
             child: ListView.builder(
               itemCount: transactions.length,
               itemBuilder: (context, index) {

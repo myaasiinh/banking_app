@@ -9,11 +9,11 @@ class IconWithText extends StatelessWidget {
   final VoidCallback onPressed;
 
   const IconWithText({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +30,13 @@ class IconWithText extends StatelessWidget {
           child: IconButton(
             icon: Icon(icon),
             onPressed: onPressed,
-            color: ColorUtils.borderSearchColors, // Icon color
+            color: ColorUtils.backgroundColors, // Warna icon hitam
           ),
         ),
         const SizedBox(height: 8), // Space between icon and text
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             color: ColorUtils.borderSearchColors, // Text color
             fontSize: 12,
             fontWeight: FontWeight.w500,
