@@ -12,7 +12,7 @@ class CreditCardSection extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
-            color: ColorUtils.mutedGreen, // Light card background color
+            color: ColorUtils.lightMint, // Light card background color
             borderRadius: BorderRadius.circular(30), // Rounded corners
           ),
           child: Row(
@@ -27,7 +27,7 @@ class CreditCardSection extends StatelessWidget {
                     height: 40,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.white,
+                      color: ColorUtils.mutedGreen,
                       border: Border.all(color: Colors.white, width: 2),
                     ),
                   ),
@@ -40,13 +40,13 @@ class CreditCardSection extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.transparent,
-                        border: Border.all(color: Colors.white, width: 2),
+                        border: Border.all(color: ColorUtils.mutedGreen, width: 2),
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(width: 75), // Increase space between circles and account number
+              const SizedBox(width: 50), // Increase space between circles and account number
               const Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

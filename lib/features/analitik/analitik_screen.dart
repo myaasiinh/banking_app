@@ -1,25 +1,25 @@
-import 'package:banking_app/core/global_component/flutter_package.dart';
-import 'package:banking_app/data/saldo/dummy/saldo_dummy.dart';
-import 'package:banking_app/features/saldo/widgets/credit_card_section.dart';
-import 'package:banking_app/features/saldo/widgets/icon_with_text.dart';
-import 'package:banking_app/features/saldo/widgets/icon_with_text_sendto.dart';
 import 'package:flutter/material.dart';
-
-import 'package:banking_app/core/constants/colors.dart';
-import 'package:banking_app/core/constants/string.dart';
-import 'package:flutter/material.dart';
-import 'package:banking_app/core/global_component/flutter_package.dart';
+import '../../../core/constants/colors.dart';
+import '../../../features/analitik/widgets/barchat_widget.dart'; // Pastikan path import sesuai
+import '../../core/constants/string.dart';
 import '../../core/global_component/credit_card_custom.dart';
+import '../../core/global_component/flutter_package.dart';
+import '../../data/analitik/dummy/analitik_dummy.dart'; // Pastikan path import sesuai
+import '../../data/analitik/model/analitik_model.dart';
 import '../../data/transaction/dummy/transaction_dummy.dart';
 import '../../data/transaction/model/transaction_model.dart';
+import '../../features/analitik/widgets/tab_menu_widget.dart'; // Pastikan path import sesuai
+import '../../features/saldo/widgets/credit_card_section.dart'; // Pastikan path import sesuai
+import '../../features/saldo/widgets/icon_with_text.dart'; // Pastikan path import sesuai
 
 class AnalitikScreen extends StatelessWidget {
   const AnalitikScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<Transaction> transactions =
-    TransactionData.getTransactions(); // Fetching dummy transactions
+    final List<Transaction> transactions = TransactionData.getTransactions(); // Fetching dummy transactions
+    final analitikDummy = AnalitikDummy();
+    final List<BarChartData> barChartDataList = analitikDummy.getDummyBarChartData();
 
     return BaseWidgetContainer(
       backgroundColor: ColorUtils.skyBlue,
@@ -31,10 +31,10 @@ class AnalitikScreen extends StatelessWidget {
           _buildHeader(), // Top header
           const SizedBox(height: 10),
           _buildAfterHeader(),
+          const SizedBox(height: 10),
           _buildCreditCardsSection(), // Section for cards
-          const SizedBox(height: 20),
-          _buildListIcon(),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
+          _buildBarChartsSection(barChartDataList), // Section for bar charts
           _buildTransactionsSection(transactions), // Section for transactions
         ],
       ),
@@ -87,13 +87,13 @@ class AnalitikScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            StringText.creditcard,
+            StringText.optimizeperformance,
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           Text(
-            StringText.totalbalance,
+            StringText.analitik,
             style: TextStyle(
-              fontSize: 50, // Ubah ukuran teks menjadi lebih besar
+              fontSize: 30, // Ubah ukuran teks menjadi lebih besar
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.left, // Atur agar teks rata kiri
@@ -111,32 +111,35 @@ class AnalitikScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CreditCardSection(),
+          Center(child: TabMenu()),
         ],
       ),
     );
   }
 
-  Widget _buildListIcon() {
+  Widget _buildBarChartsSection(List<BarChartData> barChartDataList) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          IconWithText(
-            icon: Icons.send_and_archive_outlined,
-            label: 'Send',
-            onPressed: () {},
+          const Text(
+            StringText.totalbalance,
+            style: TextStyle(fontSize: 20),
           ),
-          IconWithText(
-            icon: Icons.call_received_outlined,
-            label: 'Receive',
-            onPressed: () {},
-          ),
-          IconWithText(
-            icon: Icons.bookmark_added_outlined,
-            label: 'Add',
-            onPressed: () {},
+          SizedBox(
+            height: 200, // Adjust height as needed
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: barChartDataList.map((data) => SizedBox(
+                  width: 150, // Adjust width as needed
+                  child: BarChart(
+                    data: data,
+                  ),
+                )).toList(),
+              ),
+            ),
           ),
         ],
       ),
@@ -149,25 +152,14 @@ class AnalitikScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            StringText.lastreceipent,
+           const Text(
+            StringText.creditcard,
             style: TextStyle(fontSize: 20),
           ),
+          const SizedBox(height: 5),
           const Text(
-            StringText.sendto,
-            style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: saldoModels.map((iconModel) {
-              return IconWithTextSendto(
-                imagePath: iconModel.imagePath,
-                label: iconModel.label,
-                onPressed: () {
-                  // Handle the button press
-                },
-              );
-            }).toList(),
+            StringText.history,
+            style: TextStyle(fontSize: 30),
           ),
           const SizedBox(height: 5),
           SizedBox(

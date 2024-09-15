@@ -2,13 +2,9 @@ import 'package:banking_app/core/global_component/flutter_package.dart';
 import 'package:banking_app/data/saldo/dummy/saldo_dummy.dart';
 import 'package:banking_app/features/saldo/widgets/credit_card_section.dart';
 import 'package:banking_app/features/saldo/widgets/icon_with_text.dart';
-import 'package:banking_app/features/saldo/widgets/icon_with_text_sendto.dart';
 import 'package:flutter/material.dart';
-
 import 'package:banking_app/core/constants/colors.dart';
 import 'package:banking_app/core/constants/string.dart';
-import 'package:flutter/material.dart';
-import 'package:banking_app/core/global_component/flutter_package.dart';
 import '../../core/global_component/credit_card_custom.dart';
 import '../../data/transaction/dummy/transaction_dummy.dart';
 import '../../data/transaction/model/transaction_model.dart';
@@ -156,18 +152,6 @@ class SaldoScreen extends StatelessWidget {
           const Text(
             StringText.sendto,
             style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: saldoModels.map((iconModel) {
-              return IconWithTextSendto(
-                imagePath: iconModel.imagePath,
-                label: iconModel.label,
-                onPressed: () {
-                  // Handle the button press
-                },
-              );
-            }).toList(),
           ),
           const SizedBox(height: 5),
           SizedBox(

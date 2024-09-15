@@ -1,3 +1,4 @@
+import 'package:banking_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CreditCard extends StatelessWidget {
@@ -39,7 +40,7 @@ class CreditCard extends StatelessWidget {
         margin: const EdgeInsets.only(top: 30), // Show part of the back card
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
-          color: Colors.grey[400],
+          color: ColorUtils.purpleIllusionist,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(

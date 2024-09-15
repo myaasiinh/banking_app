@@ -42,5 +42,8 @@ class StringText {
       'Now';
            static const String usd =
       'USD';
+  static const String analitik =
+      'Analitik';
+
 
 }

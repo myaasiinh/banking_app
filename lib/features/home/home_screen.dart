@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         TransactionData.getTransactions(); // Fetching dummy transactions
 
     return BaseWidgetContainer(
-      backgroundColor: ColorUtils.purpleIllusionist,
+      backgroundColor: ColorUtils.purplishBlue,
       actvateScroll: true,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
