@@ -155,7 +155,7 @@ class SaldoScreen extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           SizedBox(
-            height: 150, // Tentukan tinggi yang sesuai atau gunakan media query
+            height: 170, // Tentukan tinggi yang sesuai atau gunakan media query
             child: ListView.builder(
               itemCount: transactions.length,
               itemBuilder: (context, index) {

@@ -11,8 +11,8 @@ import '../../data/transaction/dummy/transaction_dummy.dart';
 import '../../data/transaction/model/transaction_model.dart';
 import '../../features/analitik/widgets/tab_menu_widget.dart'; // Pastikan path import sesuai
 
-class AnalitikScreen extends StatelessWidget {
-  const AnalitikScreen({super.key});
+class AddCreditCardScreen extends StatelessWidget {
+  const AddCreditCardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

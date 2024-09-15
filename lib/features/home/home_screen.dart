@@ -1,21 +1,42 @@
-import 'package:banking_app/core/constants/colors.dart';
-import 'package:banking_app/core/constants/string.dart';
-import 'package:banking_app/core/global_component/flutter_package.dart';
+
+import 'package:banking_app/features/home/widgets/bottom_sheet_form.dart';
+import 'package:banking_app/features/home/widgets/credit_card_widget.dart';
 import 'package:flutter/material.dart';
-
+import '../../core/constants/colors.dart';
+import '../../core/constants/string.dart';
 import '../../core/global_component/credit_card_custom.dart';
+import '../../core/global_component/flutter_package.dart';
+import '../../core/utils/sqlite_utils.dart';
 import '../../data/transaction/dummy/transaction_dummy.dart';
+import '../../data/transaction/model/credit_card_model.dart';
 import '../../data/transaction/model/transaction_model.dart';
-import 'widgets/credit_card_widget.dart'; // Importing the model for transactions
 
-class HomeScreen extends StatelessWidget {
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<Transaction> transactions =
-        TransactionData.getTransactions(); // Fetching dummy transactions
+  _HomeScreenState createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  List<CreditCardModel> _cards = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCards();
+  }
+
+  Future<void> _fetchCards() async {
+    final cards = await DatabaseHelper.instance.queryAllCards();
+    setState(() {
+      _cards = cards;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return BaseWidgetContainer(
       backgroundColor: ColorUtils.purplishBlue,
       actvateScroll: true,
@@ -23,11 +44,13 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 10),
-          _buildHeader(), // Top header
+          _buildHeader(),
           const SizedBox(height: 10),
           _buildAfterHeader(),
-          _buildCreditCardsSection(), // Section for cards
-          _buildTransactionsSection(transactions), // Section for transactions
+          _buildCreditCardsSection(),
+          const SizedBox(height: 10),
+          _buildTransactionsSection(TransactionData.getTransactions()),
+          // Other sections
         ],
       ),
     );
@@ -39,31 +62,29 @@ class HomeScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Icon with rounded corner container
           Container(
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30), // Rounded corner
-              color: ColorUtils.purpleHoneycreeper, // Warna icon hitam
+              borderRadius: BorderRadius.circular(30),
+              color: ColorUtils.purpleHoneycreeper,
             ),
             child: IconButton(
               icon: const Icon(Icons.person_2_outlined),
               onPressed: () {},
-              color: ColorUtils.backgroundColors, // Warna icon hitam
+              color: ColorUtils.backgroundColors,
             ),
           ),
-          // Icon with rounded corner container
           Container(
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30), // Rounded corner
-              color: ColorUtils.purpleHoneycreeper, // Warna icon hitam
+              borderRadius: BorderRadius.circular(30),
+              color: ColorUtils.purpleHoneycreeper,
             ),
             child: IconButton(
               icon: const Icon(Icons.notifications_outlined),
-              color: ColorUtils.backgroundColors, // Warna icon hitam
+              color: ColorUtils.backgroundColors,
               onPressed: () {},
             ),
           ),
@@ -86,17 +107,12 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const SizedBox(
-                width:
-                    150, // Set lebar maksimum teks, jika terlalu panjang akan wrap ke bawah
+                width: 170,
                 child: Text(
                   StringText.allcreditcard,
-                  style: TextStyle(
-                    fontSize: 35, // Ubah ukuran teks menjadi lebih besar
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.left, // Atur agar teks rata kiri
-                  overflow: TextOverflow
-                      .visible, // Biarkan teks melanjutkan ke bawah jika terlalu panjang
+                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.left,
+                  overflow: TextOverflow.visible,
                 ),
               ),
               _buildAddButton(),
@@ -108,59 +124,72 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildCreditCardsSection() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CreditCard(
-            cardNumber: '**** 5482',
-            owner: 'Jordan Smith',
-            expiry: '04/24',
-            isPrimary: true,
-          ),
+        children: _cards.isNotEmpty
+            ? [
+          _buildCreditCardWidget(_cards[0]), // First card
+          if (_cards.length > 1) _buildCreditCardWidget(_cards[1]), // Second card if available
+          if (_cards.length > 2) _buildCreditCardWidget(_cards[2]), // Third card if available
+        ]
+            : [
+          Center(child: Text("No credit cards available")),
         ],
       ),
+    );
+  }
+
+  Widget _buildCreditCardWidget(CreditCardModel card) {
+    return CreditCard(
+      cardNumber: card.cardNumber,
+      owner: card.owner,
+      expiry: card.expiry,
+      isPrimary: card.isPrimary,
     );
   }
 
   Widget _buildAddButton() {
     return GestureDetector(
       onTap: () {
-        // Action when "Add" button is pressed
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => AddCreditCardBottomSheet(),
+        ).then((_) {
+          _fetchCards(); // Refresh the credit cards list
+        });
       },
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          // Background Button with Text
           Container(
-            padding: const EdgeInsets.only(
-                left: 16,
-                right: 50,
-                top: 10,
-                bottom: 10), // Added padding to right to prevent overlap
+            padding: const EdgeInsets.only(left: 16, right: 50, top: 10, bottom: 10),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30), // Rounded corner
-              border: Border.all(color: Colors.black), // Outline abu-abu
-              color: Colors.transparent, // Background transparan
+              borderRadius: BorderRadius.circular(15),
+              color: ColorUtils.purpleHoneycreeper,
             ),
-            child: const Text(
-              "Add",
-              style: TextStyle(color: Colors.black), // Warna tulisan abu-abu
+            child: const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                StringText.add,
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
             ),
           ),
-          // Icon with Circle that overlaps but stays aligned
           Positioned(
-            right: 0, // Align circle icon with button's right edge
-            top: -0, // Slight adjustment to center it vertically
+            right: 10,
+            top: 10,
             child: Container(
-              width: 40, // Circular container size
-              height: 40,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black, // Background lingkaran abu-abu
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: ColorUtils.coralOrange,
               ),
-              child: const Icon(Icons.add, color: Colors.white, size: 20),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
             ),
           ),
         ],
@@ -189,7 +218,7 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 130, // Tentukan tinggi yang sesuai atau gunakan media query
+            height: 170, // Tentukan tinggi yang sesuai atau gunakan media query
             child: ListView.builder(
               itemCount: transactions.length,
               itemBuilder: (context, index) {
