@@ -70,8 +70,8 @@ class _MainScreenState extends State<MainMenuScreen> with TickerProviderStateMix
         tabIconColor: Colors.grey,
         tabIconSize: 28.0,
         tabIconSelectedSize: 26.0,
-        tabSelectedColor: ColorUtils.cloudBreak,
-        tabIconSelectedColor: ColorUtils.purplishBlue,
+        tabSelectedColor: ColorUtils.peachCream,
+        tabIconSelectedColor: ColorUtils.coralOrange,
         tabBarColor: Colors.white,
         onTabItemSelected: (int value) {
           setState(() {

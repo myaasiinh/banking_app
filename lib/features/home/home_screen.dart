@@ -45,12 +45,12 @@ class HomeScreen extends StatelessWidget {
             width: 50,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30), // Rounded corner
-              color: Colors.grey[200], // Warna background container
+              color: ColorUtils.purpleHoneycreeper, // Warna icon hitam
             ),
             child: IconButton(
               icon: const Icon(Icons.person_2_outlined),
               onPressed: () {},
-              color: ColorUtils.purplishBlue, // Warna icon hitam
+              color: ColorUtils.backgroundColors, // Warna icon hitam
             ),
           ),
           // Icon with rounded corner container
@@ -59,11 +59,11 @@ class HomeScreen extends StatelessWidget {
             width: 50,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30), // Rounded corner
-              color: Colors.grey[200], // Warna background container
+              color: ColorUtils.purpleHoneycreeper, // Warna icon hitam
             ),
             child: IconButton(
               icon: const Icon(Icons.notifications_outlined),
-              color: ColorUtils.purplishBlue, // Warna icon hitam
+              color: ColorUtils.backgroundColors, // Warna icon hitam
               onPressed: () {},
             ),
           ),
