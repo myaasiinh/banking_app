@@ -36,7 +36,7 @@ class CreditCard extends StatelessWidget {
       offset: const Offset(0, -25), // Move the back card up
       child: Container(
         height: 200,
-        margin: const EdgeInsets.only(top: 30), // to show part of the back card
+        margin: const EdgeInsets.only(top: 30), // Show part of the back card
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           color: Colors.grey[400],
@@ -68,8 +68,9 @@ class CreditCard extends StatelessWidget {
             // Position the circles slightly upwards and to the right
             Positioned(
               top: 10, // Adjust this value to move the circles upwards
-              right: 16,
+              right: 16, // Adjust for aligning with the card
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround, // Distribute space between circles
                 children: [
                   // First circle
                   Container(

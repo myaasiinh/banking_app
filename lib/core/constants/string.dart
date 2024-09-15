@@ -3,44 +3,44 @@ class StringText {
   static const String yourcardinfo =
       'Your card information';
       static const String allcreditcard =
-      'all credit card';
+      'All Credit Card';
       static const String add =
-      'add';
+      'Sdd';
       static const String visa =
-      'visa';
+      'Visa';
       static const String yourcardowner =
-      'your card owner';
+      'Your Card Owner';
       static const String latest =
-      'latest';
+      'Latest';
       static const String transactions =
-      'transactions';
+      'Transactions';
       static const String creditcard =
-      'creditcard';
+      'Credit Card';
       static const String totalbalance =
-      'totalbalance';
+      'Total Balance';
       static const String lastreceipent =
-      'lastreceipent';
+      'Last Receipent';
       static const String sendto =
-      'sendto';
+      'Send To';
       static const String optimizeperformance =
-      'optimizeperformance';
+      'Optimize Performance';
       static const String history =
-      'history';
+      'History';
       static const String income =
-      'income';
+      'Income';
       static const String outcome =
-      'outcome';
+      'Outcome';
            static const String daily =
-      'daily';
+      'Daily';
            static const String weekly =
-      'weekly';
+      'Weekly';
            static const String januari2003 =
       'januari2003';
            static const String februari2003 =
       'februari2003';
            static const String now =
-      'now';
+      'Now';
            static const String usd =
-      'usd';
+      'USD';
 
 }
