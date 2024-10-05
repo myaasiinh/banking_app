@@ -1,6 +1,5 @@
 import 'package:banking_app/core/constants/colors.dart';
 import 'package:banking_app/core/constants/string.dart';
-import 'package:banking_app/core/global_component/flutter_package.dart';
 import 'package:banking_app/core/global_component/bottom_sheet_form.dart';
 import 'package:flutter/material.dart';
 
@@ -48,19 +47,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BaseWidgetContainer(
+    return Scaffold(
       backgroundColor: ColorUtils.purplishBlue,
-      actvateScroll: true,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 10),
-          _buildHeader(),
-          const SizedBox(height: 10),
-          _buildAfterHeader(),
-          _buildCreditCardsSection(),
-          _buildTransactionsSection(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 10),
+            _buildHeader(),
+            const SizedBox(height: 10),
+            _buildAfterHeader(),
+            _buildCreditCardsSection(),
+            _buildTransactionsSection(),
+          ],
+        ),
       ),
     );
   }

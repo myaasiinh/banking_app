@@ -1,5 +1,4 @@
 
-import 'package:banking_app/core/global_component/flutter_package.dart';
 import 'package:banking_app/features/analitik/analitik_screen.dart';
 import 'package:banking_app/features/home/home_screen.dart';
 import 'package:banking_app/features/saldo/saldo_screen.dart';
@@ -41,7 +40,7 @@ class _MainScreenState extends State<MainMenuScreen> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BaseWidgetContainer(
+      child: Scaffold(
         body: Container(
           color: ColorUtils.purpleHoneycreeper,
           child: Center(

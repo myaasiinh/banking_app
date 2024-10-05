@@ -1,6 +1,4 @@
-import 'package:banking_app/core/global_component/flutter_package.dart';
 import 'package:flutter/material.dart';
-
 import '../../core/constants/images.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -15,7 +13,7 @@ class SplashScreen extends StatelessWidget {
       Navigator.pushReplacementNamed(context, '/main');
     });
 
-    return BaseWidgetContainer(
+    return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(96),
         child: Center(

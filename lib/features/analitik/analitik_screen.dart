@@ -4,7 +4,6 @@ import '../../../core/constants/colors.dart';
 import '../../../features/analitik/widgets/barchat_widget.dart'; // Pastikan path import sesuai
 import '../../core/constants/string.dart';
 import '../../core/global_component/credit_card_custom.dart';
-import '../../core/global_component/flutter_package.dart';
 import '../../core/utils/sqlite_utils.dart';
 import '../../data/analitik/dummy/analitik_dummy.dart'; // Pastikan path import sesuai
 import '../../data/analitik/model/analitik_model.dart';
@@ -47,22 +46,23 @@ class _AnalitikScreenState extends State<AnalitikScreen> {
     final analitikDummy = AnalitikDummy();
     final List<BarChartData> barChartDataList = analitikDummy.getDummyBarChartData();
 
-    return BaseWidgetContainer(
+    return Scaffold(
       backgroundColor: ColorUtils.skyBlue,
-      actvateScroll: true,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 10),
-          _buildHeader(), // Top header
-          const SizedBox(height: 10),
-          _buildAfterHeader(),
-          const SizedBox(height: 10),
-          _buildCreditCardsSection(), // Section for cards
-          const SizedBox(height: 10),
-          _buildBarChartsSection(barChartDataList), // Section for bar charts
-          _buildTransactionsSection(), // Section for transactions
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 10),
+            _buildHeader(), // Top header
+            const SizedBox(height: 10),
+            _buildAfterHeader(),
+            const SizedBox(height: 10),
+            _buildCreditCardsSection(), // Section for cards
+            const SizedBox(height: 10),
+            _buildBarChartsSection(barChartDataList), // Section for bar charts
+            _buildTransactionsSection(), // Section for transactions
+          ],
+        ),
       ),
     );
   }
