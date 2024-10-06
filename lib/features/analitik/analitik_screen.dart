@@ -1,4 +1,3 @@
-import 'package:banking_app/features/analitik/widgets/bar_chat_desc.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constants/colors.dart';
 import '../../../features/analitik/widgets/barchat_widget.dart'; // Pastikan path import sesuai
@@ -7,9 +6,9 @@ import '../../core/global_component/credit_card_custom.dart';
 import '../../core/utils/sqlite_utils.dart';
 import '../../data/analitik/dummy/analitik_dummy.dart'; // Pastikan path import sesuai
 import '../../data/analitik/model/analitik_model.dart';
-import '../../data/transaction/dummy/transaction_dummy.dart';
 import '../../data/transaction/model/transaction_model.dart';
-import '../../features/analitik/widgets/tab_menu_widget.dart'; // Pastikan path import sesuai
+import '../../features/analitik/widgets/tab_menu_widget.dart';
+import 'widgets/bar_chat_desc.dart'; // Pastikan path import sesuai
 
 class AnalitikScreen extends StatefulWidget {
   const AnalitikScreen({super.key});

@@ -1,12 +1,11 @@
 
-import 'package:banking_app/features/analitik/analitik_screen.dart';
-import 'package:banking_app/features/home/home_screen.dart';
-import 'package:banking_app/features/saldo/saldo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 import 'package:motion_tab_bar_v2/motion-tab-controller.dart';
-
 import '../../core/constants/colors.dart';
+import '../analitik/analitik_screen.dart';
+import '../home/home_screen.dart';
+import '../saldo/saldo_screen.dart';
 
 
 class MainMenuScreen extends StatefulWidget {

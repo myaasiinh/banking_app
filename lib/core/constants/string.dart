@@ -23,4 +23,5 @@ class StringText {
   static const String usd = 'USD';
   static const String analitik = 'Analitik';
   static const String notransactions = '  No transactions yet, add one!';
-  static const String nohistoryaddDatafromHome = 'add data from home';}
+  static const String nohistoryaddDatafromHome = 'add data from home';
+}
